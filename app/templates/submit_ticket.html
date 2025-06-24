@@ -1,0 +1,7 @@
+<h1>Submit Ticket</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.title.label }} {{ form.title() }}<br>
+    {{ form.description.label }} {{ form.description() }}<br>
+    {{ form.submit() }}
+</form>
