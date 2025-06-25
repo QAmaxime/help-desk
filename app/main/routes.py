@@ -17,8 +17,10 @@ def admin_home():
     return render_template('admin_home.html')
 
 @main.route('/user')
+@login_required
 def user_home():
-    return render_template('user_home.html')
+    tickets = Ticket.query.filter_by(user_id=current_user.id).all()
+    return render_template('user_home.html', tickets=tickets)
 
 @main.route('/submit-ticket', methods=['GET','POST'])
 @login_required
