@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import SelectField, StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
 
 class LoginForm(FlaskForm):
@@ -15,5 +15,11 @@ class RegisterForm(FlaskForm):
 
 class TicketForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(min=2,max=150)])
+    system_type = SelectField(
+        'System Type',
+        choices=[('', '-- Select Type --'), ('Hardware', 'Hardware'), ('Software', 'Software')],
+        validators=[DataRequired()]
+    )
+    system = StringField('System', validators=[DataRequired(), Length(min=2,max=150)])
     description = TextAreaField('Description', validators=[DataRequired()])
     submit = SubmitField('Submit Ticket')

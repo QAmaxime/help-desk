@@ -17,6 +17,8 @@
         <tr>
             <th>Title</th>
             <th>Status</th>
+            <th>System Type</th>
+            <th>System</th>
             <th>Description</th>
         </tr>
     </thead>
@@ -25,6 +27,8 @@
         <tr>
             <td>{{ ticket.title }}</td>
             <td>{{ ticket.status }}</td>
+            <td>{{ ticket.system_type }}</td>
+            <td>{{ ticket.system }}</td>
             <td>{{ ticket.description }}</td>
         </tr>
         {% endfor %}
