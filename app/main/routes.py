@@ -45,7 +45,12 @@ def update_ticket(ticket_id):
     flash('Ticket updated.', 'success')
     return redirect(url_for('main.admin_home'))
 
-
+@main.route('/delete_ticket/<int:ticket_id>', methods=['POST'])
+def delete_ticket(ticket_id):
+    ticket = Ticket.query.get_or_404(ticket_id)
+    db.session.delete(ticket)
+    db.session.commit()
+    return redirect(url_for('main.admin_home'))
 
 @main.route('/submit-ticket', methods=['GET','POST'])
 @login_required
