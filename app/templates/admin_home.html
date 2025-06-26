@@ -10,7 +10,40 @@
 
 <a href="{{ url_for('main.manage_users') }}">Manage Users</a>
 
-<h1>All Tickets</h1>
+<h1>Your Assigned Tickets</h1>
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>System Type</th>
+            <th>System</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in my_tickets %}
+        <tr>
+            <form method="POST" action="{{ url_for('main.update_ticket', ticket_id=ticket.id) }}">
+                <td>{{ ticket.title }}</td>
+                <td><select name="status">
+                    {% for s in ['Open', 'In Progress', 'Closed'] %}
+                    <option value="{{ s }}" {% if ticket.status == s %}selected{% endif %}>{{ s }}</option>
+                    {% endfor %}
+                </select></td>
+                <td>{{ ticket.system_type }}</td>
+                <td>{{ ticket.system }}</td>
+                <td>{{ ticket.description }}</td>
+                <td><button type="submit">Update</button></td>
+            </form>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<h2>All Tickets</h2>
 
 <table border="1" cellpadding="5">
     <thead>
@@ -49,38 +82,6 @@
                         {% endfor %}
                     </select>
                 </td>
-                <td><button type="submit">Update</button></td>
-            </form>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<h2>Your Assigned Tickets</h2>
-<table border="1" cellpadding="5">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Status</th>
-            <th>System Type</th>
-            <th>System</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for ticket in my_tickets %}
-        <tr>
-            <form method="POST" action="{{ url_for('main.update_ticket', ticket_id=ticket.id) }}">
-                <td>{{ ticket.title }}</td>
-                <td><select name="status">
-                    {% for s in ['Open', 'In Progress', 'Closed'] %}
-                    <option value="{{ s }}" {% if ticket.status == s %}selected{% endif %}>{{ s }}</option>
-                    {% endfor %}
-                </select></td>
-                <td>{{ ticket.system_type }}</td>
-                <td>{{ ticket.system }}</td>
-                <td>{{ ticket.description }}</td>
                 <td><button type="submit">Update</button></td>
             </form>
         </tr>
