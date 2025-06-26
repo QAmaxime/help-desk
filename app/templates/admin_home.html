@@ -1,5 +1,3 @@
-<h1>All Tickets</h1>
-
 {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
         <ul>
@@ -10,12 +8,16 @@
     {% endif %}
 {% endwith %}
 
+<h1>All Tickets</h1>
+
 <table border="1" cellpadding="5">
     <thead>
         <tr>
             <th>Title</th>
             <th>Status</th>
             <th>Description</th>
+            <th>System Type</th>
+            <th>System</th>
             <th>Assignee</th>
             <th>Actions</th>
         </tr>
@@ -32,6 +34,8 @@
                         {% endfor %}
                     </select>
                 </td>
+                <td>{{ ticket.system_type }}</td>
+                <td>{{ ticket.system }}</td>
                 <td>{{ ticket.description }}</td>
                 <td>
                     <select name="assignee">
@@ -56,15 +60,27 @@
         <tr>
             <th>Title</th>
             <th>Status</th>
+            <th>System Type</th>
+            <th>System</th>
             <th>Description</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         {% for ticket in my_tickets %}
         <tr>
-            <td>{{ ticket.title }}</td>
-            <td>{{ ticket.status }}</td>
-            <td>{{ ticket.description }}</td>
+            <form method="POST" action="{{ url_for('main.update_ticket', ticket_id=ticket.id) }}">
+                <td>{{ ticket.title }}</td>
+                <td><select name="status">
+                    {% for s in ['Open', 'In Progress', 'Closed'] %}
+                    <option value="{{ s }}" {% if ticket.status == s %}selected{% endif %}>{{ s }}</option>
+                    {% endfor %}
+                </select></td>
+                <td>{{ ticket.system_type }}</td>
+                <td>{{ ticket.system }}</td>
+                <td>{{ ticket.description }}</td>
+                <td><button type="submit">Update</button></td>
+            </form>
         </tr>
         {% endfor %}
     </tbody>

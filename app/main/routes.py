@@ -52,7 +52,7 @@ def update_ticket(ticket_id):
 def submit_ticket():
     form = TicketForm()
     if form.validate_on_submit():
-        ticket = Ticket(title=form.title.data, description=form.description.data, user_id=current_user.id)
+        ticket = Ticket(title=form.title.data, description=form.description.data, user_id=current_user.id, system=form.system.data, system_type=form.system_type.data)
         db.session.add(ticket)
         db.session.commit()
         flash('Ticket submitted.', 'success')

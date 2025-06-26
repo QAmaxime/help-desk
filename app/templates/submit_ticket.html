@@ -2,6 +2,8 @@
 <form method="POST">
     {{ form.hidden_tag() }}
     {{ form.title.label }} {{ form.title() }}<br>
+    {{ form.system_type.label }} {{ form.system_type() }}<br>
+    {{ form.system.label }} {{ form.system() }}<br>
     {{ form.description.label }} {{ form.description() }}<br>
     {{ form.submit() }}
 </form>
