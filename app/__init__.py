@@ -1,7 +1,13 @@
+"""
+Main application factory and configuration.
+This file sets up the Flask application with all necessary extensions.
+"""
+
+# Initialise Flask extensions
+from dotenv import load_dotenv
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from dotenv import load_dotenv
 import os
 
 db = SQLAlchemy()
@@ -9,6 +15,12 @@ login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 
 def create_app():
+
+    """
+    Application factory function that creates and configures the Flask app.
+    Returns a configured Flask application instance.
+    """
+
     app = Flask(__name__)
     load_dotenv()
     app.config['SECRET_KEY'] =os.getenv('SECRET_KEY')
