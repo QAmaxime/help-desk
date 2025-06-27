@@ -18,7 +18,6 @@
             <th>System Type</th>
             <th>System</th>
             <th>Description</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -29,9 +28,6 @@
             <td>{{ ticket.system_type }}</td>
             <td>{{ ticket.system }}</td>
             <td>{{ ticket.description }}</td>
-            <td><form method="post" action="{{ url_for('main.delete_ticket', ticket_id=ticket.id) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete `{{ ticket.title }}`?');">
-                <button class="btn btn-sm btn-danger">Delete</button>
-            </form></td>
         </tr>
         {% endfor %}
     </tbody>
