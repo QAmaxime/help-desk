@@ -1,3 +1,11 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
 <h1>Submit Ticket</h1>
 <form method="POST">
     {{ form.hidden_tag() }}
@@ -17,3 +25,6 @@
         </ul>
     {% endif %}
 {% endwith %}
+
+</div>
+</body>

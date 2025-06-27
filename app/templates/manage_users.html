@@ -1,3 +1,11 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
 <a href="{{ url_for('main.admin_home') }}">Admin Home</a>
 
 <h2>User Management</h2>
@@ -41,3 +49,6 @@
         {% endfor %}
         </tbody>
     </table>
+
+</div>
+</body>
