@@ -4,10 +4,10 @@ This file sets up the Flask application with all necessary extensions.
 """
 
 # Initialise Flask extensions
+from dotenv import load_dotenv
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from dotenv import load_dotenv
 import os
 
 db = SQLAlchemy()
@@ -22,16 +22,12 @@ def create_app():
     """
 
     app = Flask(__name__)
-
-    # Load environment variables from .env file
     load_dotenv()
     app.config['SECRET_KEY'] =os.getenv('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] =os.getenv('DATABASE_URI')
 
     db.init_app(app)
     login_manager.init_app(app)
-
-    # Register blueprints
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
