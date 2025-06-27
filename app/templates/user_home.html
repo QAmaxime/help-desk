@@ -1,16 +1,14 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
 <h1>Your Tickets</h1>
 
 <a href="{{ url_for('main.submit_ticket') }}">Submit New Ticket</a>
-
-{% with messages = get_flashed_messages(with_categories=True) %}
-    {% if messages %}
-        <ul>
-            {% for category, message in messages %}
-                <li class="{{ category }}">{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}
 
 <table border="1" cellpadding="5">
     <thead>
@@ -31,8 +29,8 @@
             <td>{{ ticket.system_type }}</td>
             <td>{{ ticket.system }}</td>
             <td>{{ ticket.description }}</td>
-            <td><form action="{{ url_for('main.delete_ticket', ticket_id=ticket.id) }}" method="POST" style="display:inline;">
-                <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this ticket?');">
+            <td><form method="post" action="{{ url_for('main.delete_ticket', ticket_id=ticket.id) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete `{{ ticket.title }}`?');">
+                <button class="btn btn-sm btn-danger">Delete</button>
             </form></td>
         </tr>
         {% endfor %}
@@ -40,3 +38,16 @@
 </table>
 
 <a href="{{ url_for('auth.logout') }}">Logout</a>
+
+{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+</div>
+</body>
