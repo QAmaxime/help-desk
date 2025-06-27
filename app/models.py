@@ -1,8 +1,18 @@
+"""
+Database models defining the structure of User and Ticket tables.
+Uses SQLAlchemy ORM for database interactions.
+"""
+
 from . import db
 from flask_login import UserMixin
 from . import login_manager
 
 class User(UserMixin, db.Model):
+    """
+    User model representing registered users in the system.
+    Involves 1-M relationships.
+    """
+
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -20,6 +30,11 @@ class User(UserMixin, db.Model):
         return f'<User {self.username}, Role: {self.role}>'
 
 class Ticket(db.Model):
+    """
+    Ticket model representing support tickets in the system.
+    Each ticket belongs to a user and can be assigned to an admin.
+    """
+
     __tablename__ = 'ticket'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -36,6 +51,7 @@ class Ticket(db.Model):
     def __repr__(self):
         return f'<Ticket #{self.id} - {self.title}>'
 
+#Flask-Login callback to reload user from session.
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))

@@ -1,3 +1,8 @@
+"""
+WTForms definitions for handling form validation and rendering.
+Each form class represents a HTML form with validation rules.
+"""
+
 from flask_wtf import FlaskForm 
 from wtforms import SelectField, StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
